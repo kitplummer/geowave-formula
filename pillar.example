@@ -1,0 +1,4 @@
+geowave:
+  targeting_method: grain # [compound, glob] also supported
+  namenode_target: "roles:accumulo_master" # Specify compound matching string to match all your namenodes
+  appserver_target: "roles:geoserver_host" # Specify compound matching string to match all your namenodes
