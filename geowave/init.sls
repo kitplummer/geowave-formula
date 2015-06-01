@@ -16,12 +16,25 @@ geowave-repo:
       - geowave-repo: {{ geowave.repo_pkg_url }}
 
 {%- if geowave.is_namenode %}
+/usr/bin/hadoop:
+  file.symlink:
+    - target: /usr/lib/hadoop/bin/hadoop
+
+/usr/lib/hadoop/bin/hadoop:
+  file.replace:
+    - pattern: bin=`dirname \${bin}`
+    - repl: bin=`readlink ${bin}`;bin=`dirname ${bin}`
+    - count: 1
+
 {{ geowave.accumulo_pkg }}:
   pkg.installed:
     - fromrepo: geowave
+    - version: {{ geowave.geowave_version }}
     - require:
 #      - pkgrepo: geowave-repo
       - pkg: geowave-repo
+      - file: /usr/bin/hadoop
+      - file: /usr/lib/hadoop/bin/hadoop
 {%- endif %}
 
 {%- if geowave.is_appserver %}
