@@ -5,6 +5,8 @@
 # $4 - accumulo shell user
 # $5 - accumulo shell password
 
+echo $@
+
 echo -e "geowave\ngeowave\n" | /usr/lib/accumulo/bin/accumulo shell -u $4 -p $5 -e "createuser geowave"
 /usr/lib/accumulo/bin/accumulo shell -u $4 -p $5 -e "createnamespace geowave"
 /usr/lib/accumulo/bin/accumulo shell -u $4 -p $5 -e "grant NameSpace.CREATE_TABLE -ns geowave -u geowave"

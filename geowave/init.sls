@@ -1,3 +1,4 @@
+{%- from 'hadoop/settings.sls' import hadoop with context %}
 {%- from 'geowave/settings.sls' import geowave with context %}
 
 remove-existing-geowave-repo:
@@ -45,8 +46,7 @@ include:
 geowave-accumulo-config:
   cmd.script:
     - source: salt://geowave/files/geowave-accumulo-config.sh
-#TODO: make 'localhost' generic; pull the DNS of the name_node from somewhere?
-    - args: localhost {{ geowave.name_node_port }} {{ geowave.accumulo_classpath }} {{ geowave.accumulo_user }} {{geowave.accumulo_pswd }}
+    - args: {{ hadoop.namenode_host }} {{ geowave.name_node_port }} {{ geowave.accumulo_classpath }} {{ geowave.accumulo_user }} {{geowave.accumulo_pswd }}
     - user: accumulo
     - require:
       - pkg: {{ geowave.accumulo_pkg }}
