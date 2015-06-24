@@ -12,9 +12,9 @@
 {%- set geowave_version    = '0.8.8-201506221313' %}
 {%- set accumulo_classpath = 'geowave/0.8.8-cdh5' %}
 {%- set name_node_port     = '8020' %}
-#TODO: use the ones set in the actual accumulo formula
-{%- set accumulo_user      = 'root' %}
-{%- set accumulo_pswd      = 'root' %}
+
+{%- set accumulo_user      = gc.get('accumulo_user', pc.get('accumulo_user', 'root')) %}
+{%- set accumulo_pswd      = gc.get('accumulo_pswd', pc.get('accumulo_pswd', 'secret')) %}
 
 {%- set from_pkg_repo = false %}
 {%- set repo_pkg_url  = 'http://s3.amazonaws.com/geowave-rpms/release/noarch/geowave-repo-1.0-3.noarch.rpm' %}
@@ -29,7 +29,7 @@
 {%- set tools_pkg_url     = 'http://s3.amazonaws.com/geowave-rpms/dev/noarch/geowave-0.8.8-cdh5-tools.201506221313.noarch.rpm' %}
 
 {%- set geowave = {} %}
-{%- do geowave.update({ 
+{%- do geowave.update({
                         'is_namenode'        : is_namenode,
                         'is_appserver'       : is_appserver,
                         'geowave_version'    : geowave_version,
