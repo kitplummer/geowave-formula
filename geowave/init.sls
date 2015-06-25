@@ -27,8 +27,8 @@ geowave-repo:
 {%- if geowave.is_namenode %}
 include:
   - sudoers
-  - hadoop
-  - accumulo
+#  - hadoop
+#  - accumulo
 
 #### Fix Hadoop ####
 /usr/bin/hadoop:
