@@ -25,10 +25,6 @@ geowave-repo:
 
 #### Set-up GeoWave on Accumulo Master ####
 {%- if geowave.is_namenode %}
-include:
-  - sudoers
-#  - hadoop
-#  - accumulo
 
 #### Fix Hadoop ####
 /usr/bin/hadoop:
@@ -86,8 +82,6 @@ geowave-accumulo-config:
 
 #### Set-up GeoWave on App Server ####
 {%- if geowave.is_appserver %}
-include:
-  - sudoers
 
 #### Set-up GeoWave on App Server from Package Repo ####
 {%- if geowave.from_pkg_repo %}
