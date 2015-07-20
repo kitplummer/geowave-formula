@@ -23,6 +23,13 @@ geowave-repo:
       - {{ geowave.core_pkg }}: {{ geowave.core_pkg_url }}
 {%- endif %}
 
+#### Set-up GeoWave on Accumulo Master ####
+{%- if geowave.is_namenode %}
+include:
+  - sudoers
+#  - hadoop
+#  - accumulo
+
 #### Fix Hadoop ####
 /usr/bin/hadoop:
   file.symlink:
@@ -76,6 +83,11 @@ geowave-accumulo-config:
     - require:
       - pkg: {{ geowave.accumulo_pkg }}
 {%- endif %}
+
+#### Set-up GeoWave on App Server ####
+{%- if geowave.is_appserver %}
+include:
+  - sudoers
 
 #### Set-up GeoWave on App Server from Package Repo ####
 {%- if geowave.from_pkg_repo %}
