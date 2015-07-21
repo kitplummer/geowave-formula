@@ -99,6 +99,11 @@ geowave-accumulo-config:
     - require:
       - pkg: geowave-repo
 
+geowave-service:
+  service.running:
+    - name: geowave
+    - enable: True
+
 #### Set-up GeoWave on App Server from URL ####
 {%- else %}
 {{ geowave.tools_pkg }}:
@@ -117,5 +122,10 @@ geowave-accumulo-config:
     - require:
       - pkg: {{ geowave.core_pkg }}
       - pkg: {{ geowave.tools_pkg }}
+
+geowave-service:
+  service.running:
+    - name: geowave
+    - enable: True
 {%- endif %}
 {%- endif %}
